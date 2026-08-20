@@ -1,3 +1,3 @@
 # HyroxPlanner-project
 
-Eu e Caio Belmont somos criadores deste projeto.
+Criadores: Carlos Vinicius & Caio Belmont & Ana Luiza
