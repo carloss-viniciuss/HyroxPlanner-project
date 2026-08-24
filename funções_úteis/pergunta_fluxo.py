@@ -1,4 +1,4 @@
-from limpeza_terminal import clear
+from funções_úteis.limpeza_terminal import clear
 
 def pergunta(): #a pergunta de continuação do sistema
     while True:

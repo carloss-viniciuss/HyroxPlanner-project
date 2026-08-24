@@ -1,4 +1,4 @@
-from funções_úteis import limpeza_terminal
+from funções_úteis.limpeza_terminal import clear
 
 def editarOtipo(tipo_antigo):
     while True:
@@ -27,8 +27,8 @@ def editarOtipo(tipo_antigo):
                     return "SIMULADO HYROX"
 
                 case _:
-                    limpeza_terminal()
+                    clear()
                     print("Digite apenas 1, 2 ou 3!\n")
         except ValueError:
-            limpeza_terminal()
+            clear()
             print("Resposta inválida!\n")
