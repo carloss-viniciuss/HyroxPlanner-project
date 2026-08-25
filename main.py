@@ -28,10 +28,7 @@ while True:
         "[4] Visualizar competições\n"
         "[5] Editar\n"
         "[6] Excluir\n"
-        "[7] Controle de Desempenho\n"
-        "[8] Acompanhar Evolução\n"
-        "[9] Sugestões Personalizadas\n"
-        "[11] Parar"
+        "[7] Parar"
         "\nRESPOSTA: "))
    clear()
 
@@ -223,3 +220,7 @@ while True:
             file.write(conteudo_atualizado)
         
         print("Treino Excluído Com Sucesso!\n\n")
+
+    case 7:
+        print("Programa Finalizado!")
+        break
