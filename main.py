@@ -19,7 +19,7 @@ open("Sistema de Treinos.txt", "a").close()
 
 clear()
 while True:
-   print("==========BEM VINDO AO HYROX PLANNER=========dicionar")
+   print("==========BEM VINDO AO HYROX PLANNER=========")
    dashboard()
    opcao_escolhida = int(input("Você deseja:" 
     "\n[1] Adicionar Treino\n"
@@ -113,7 +113,7 @@ while True:
         treino_antigo = input("Digite qual treino deseja editar: ").upper().strip()
 
         for treino in treinos:
-            if f"NOME DO TREINO: {treino_antigo}\n" in treinos:
+            if f"NOME DO TREINO: {treino_antigo}\n" in treino:
                 treino_encontrado = treino
                 break
 
@@ -125,19 +125,19 @@ while True:
         linhas = treino_encontrado.split("\n")
 
         
-        nome_antigo = linhas[1].replace("NOME DO TREINO: ", "")
-        tipo_antigo = linhas[2].replace("TIPO DE TREINO: ", "")
-        data_antiga = linhas[3].replace("DATA DO TREINO: ", "")
-        duracao_antiga = linhas[4].replace("DURAÇÃO DO TREINO: ", "")
-        intensidade_antiga = linhas[5].replace("INTENSIDADE DO TREINO: ", "")
+        nome_antigo = linhas[0].replace("NOME DO TREINO: ", "")
+        tipo_antigo = linhas[1].replace("TIPO DE TREINO: ", "")
+        data_antiga = linhas[2].replace("DATA DO TREINO: ", "")
+        duracao_antiga = linhas[3].replace("DURAÇÃO DO TREINO: ", "")
+        intensidade_antiga = linhas[4].replace("INTENSIDADE DO TREINO: ", "")
 
         clear()
-        novo_nome = editarOnome()
+        novo_nome = editarOnome(nome_antigo)
         if novo_nome == "":
             novo_nome = nome_antigo
         
         clear()
-        novo_tipo = editarOtipo()
+        novo_tipo = editarOtipo(tipo_antigo)
         if novo_tipo == "":
             novo_tipo = tipo_antigo
 
@@ -167,7 +167,7 @@ while True:
             nova_duracao = duracao_antiga
 
         clear()
-        nova_intensidade = editarAintensidade()
+        nova_intensidade = editarAintensidade(intensidade_antiga)
         if nova_intensidade == "":
             nova_intensidade = intensidade_antiga
 
