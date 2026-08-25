@@ -192,4 +192,34 @@ while True:
         clear()
         print("Treino editado com sucesso!")
 
+    case 6:
+        conteudo = abrir_leitura()
+        divisor = "----------------------------------------"
+        blocos = conteudo.split(divisor)
+        
+        treinos = [t.strip() for t in blocos if t.strip()]
+        
+        while True: 
+            treino_excluir = input("Digite o treino que deseja excluir: ").strip().upper()
+            existe = any(f"NOME DO TREINO: {treino_excluir}" in t.upper() for t in treinos)
+            
+            if not existe:
+                clear()
+                print("Treino inexistente!\n")
+                continue
+            else:
+                clear()
+                break
     
+        tag_busca = f"NOME DO TREINO: {treino_excluir}"
+        conjunto_fica = [t for t in treinos if tag_busca not in t.upper()]
+    
+        if conjunto_fica:
+            conteudo_atualizado = "\n\n".join(conjunto_fica) + f"\n{divisor}\n"
+        else:
+            conteudo_atualizado = ""
+
+        with open("Sistema de Treinos.txt", "w", encoding="utf-8") as file:
+            file.write(conteudo_atualizado)
+        
+        print("Treino Excluído Com Sucesso!\n\n")
