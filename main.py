@@ -11,6 +11,10 @@ from Adicionar.adição_treino.tipo_treino import tipoDEtreino
 
 from Adicionar.competicao.add_competicao import adicionar_competicao
 
+from edição_Treino.editar_nome import editarOnome
+from edição_Treino.editar_tipo import editarOtipo
+from edição_Treino.editar_intensidade import editarAintensidade
+
 open("Sistema de Treinos.txt", "a").close()
 
 clear()
@@ -100,3 +104,92 @@ while True:
                   
         if not pergunta():
             break
+
+    case 5:
+        conteudo = abrir_leitura()
+        treinos = conteudo.split("\n\n")
+        treino_encontrado = None
+
+        treino_antigo = input("Digite qual treino deseja editar: ").upper().strip()
+
+        for treino in treinos:
+            if f"NOME DO TREINO: {treino_antigo}\n" in treinos:
+                treino_encontrado = treino
+                break
+
+        if treino_encontrado is None:
+            print("Treino inexistente!")
+            continue
+
+
+        linhas = treino_encontrado.split("\n")
+
+        
+        nome_antigo = linhas[1].replace("NOME DO TREINO: ", "")
+        tipo_antigo = linhas[2].replace("TIPO DE TREINO: ", "")
+        data_antiga = linhas[3].replace("DATA DO TREINO: ", "")
+        duracao_antiga = linhas[4].replace("DURAÇÃO DO TREINO: ", "")
+        intensidade_antiga = linhas[5].replace("INTENSIDADE DO TREINO: ", "")
+
+        clear()
+        novo_nome = editarOnome()
+        if novo_nome == "":
+            novo_nome = nome_antigo
+        
+        clear()
+        novo_tipo = editarOtipo()
+        if novo_tipo == "":
+            novo_tipo = tipo_antigo
+
+        clear()
+        from datetime import datetime
+        while True:
+            nova_data = input(f"Data atual: {data_antiga}\n"
+                               "Nova data (DD/MM/AAAA) (ENTER para manter): ").strip()
+            if nova_data == "":
+                nova_data = data_antiga
+                break
+            try:
+                datetime.strptime(nova_data, "%d/%m/%Y") #so permite datas válidas e existentes
+                break
+            except ValueError:
+                clear()
+                print("Data inválida! Use o formato DD/MM/AAAA.\n")
+
+
+        clear()
+        nova_duracao = input(
+            f"Duração atual: {duracao_antiga}\nDigite ENTER para manter\n"
+            "Nova duração: ").strip()
+
+         # se apertar ENTER continua o mesmo
+        if nova_duracao == "":
+            nova_duracao = duracao_antiga
+
+        clear()
+        nova_intensidade = editarAintensidade()
+        if nova_intensidade == "":
+            nova_intensidade = intensidade_antiga
+
+
+        dados_novos = (
+            "Dados do Treino:"
+            "\nNOME DO TREINO: " + novo_nome.upper()
+            + "\nTIPO DE TREINO: " + novo_tipo
+            + "\nDATA DO TREINO: " + nova_data
+            + "\nDURAÇÃO DO TREINO: " + nova_duracao
+            + "\nINTENSIDADE DO TREINO: " + nova_intensidade)
+
+        for i in range(len(treinos)):
+            if f"NOME DO TREINO: {treino_antigo}" in treinos[i]:
+                treinos[i] = dados_novos
+
+        novo_conteudo = "\n\n".join(treinos)
+
+        with open("Sistema de Treinos.txt", "w") as treino:
+            treino.write(novo_conteudo)
+
+        clear()
+        print("Treino editado com sucesso!")
+
+    
