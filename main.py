@@ -224,3 +224,8 @@ while True:
     case 7:
         print("Programa Finalizado!")
         break
+
+    case _:
+        print("Opção inválida!")
+        if not pergunta():
+            break
