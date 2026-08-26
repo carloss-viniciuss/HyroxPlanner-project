@@ -2,7 +2,6 @@ from funções_úteis.limpeza_terminal import clear
 from funções_úteis.dashboard_dinamico import dashboard
 from funções_úteis.leitura import abrir_leitura
 from funções_úteis.validação_data import validar_data
-from funções_úteis.calculo_dias import dias_restantes
 from funções_úteis.pergunta_fluxo import pergunta
 
 from Adicionar.adição_treino.nome_treino import nomeDOtreino
