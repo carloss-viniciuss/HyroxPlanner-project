@@ -16,6 +16,7 @@
             <li>
                 <strong>{{ treino.nome }}</strong> ({{ treino.tipo }}) - {{ treino.data }}<br>
                 Duração: {{ treino.duracao }} | Intensidade: {{ treino.intensidade }}
+                <a href="/treinos/editar/{{ treino.pk }}/">Editar</a>
             </li>
         {% endfor %}
         </ul>

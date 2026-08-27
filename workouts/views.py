@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect # Adicionado redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Treino, Competicao
-from .forms import TreinoForm # Importa o formulário
+from .forms import TreinoForm
 from .forms import CompetForm
 
 def listar_treinos(request):
@@ -33,3 +33,16 @@ def criar_competicao(request):
         form = CompetForm()
         
     return render(request, 'workouts/adicionar_competicoes.html', {'form': form})
+
+def editar_treino(request, pk):
+    treino = get_object_or_404(Treino, pk=pk)
+    
+    if request.method == 'POST':
+        form = TreinoForm(request.POST, instance=treino)
+        if form.is_valid():
+            form.save()
+            return redirect('listar_treinos')
+    else:
+        form = TreinoForm(instance=treino)
+    
+    return render(request, 'workouts/adicionar_treino.html', {'form': form})
