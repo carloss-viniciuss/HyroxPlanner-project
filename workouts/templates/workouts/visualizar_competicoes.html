@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Minhas Competições - Hyrox</title>
+</head>
+<body>
+    <h1>Minhas Competições</h1>
+
+    <a href="/treinos/competicoes/nova/">+ Adicionar Nova Competição</a>
+    <hr>
+
+    {% if competicoes %}
+        <ul>
+        {% for comp in competicoes %}
+            <li>
+                <strong>{{ comp.nome }}</strong> - {{ comp.data }}<br>
+                Local: {{ comp.local }} | Categoria: {{ comp.categoria }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nenhuma competição cadastrada ainda.</p>
+    {% endif %}
+
+    <br>
+    <a href="/treinos/">Voltar para Treinos</a>
+</body>
+</html>
