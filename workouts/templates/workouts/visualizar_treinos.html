@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Meus Treinos - Hyrox</title>
+</head>
+<body>
+    <h1>Meus Treinos Hyrox</h1>
+
+    <a href="/treinos/novo/">+ Adicionar Novo Treino</a>
+    <hr>
+
+    {% if treinos %}
+        <ul>
+        {% for treino in treinos %}
+            <li>
+                <strong>{{ treino.nome }}</strong> ({{ treino.tipo }}) - {{ treino.data }}<br>
+                Duração: {{ treino.duracao }} | Intensidade: {{ treino.intensidade }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nenhum treino cadastrado ainda.</p>
+    {% endif %}
+
+    <br>
+    <a href="/treinos/competicoes/">Ver Competições</a>
+</body>
+</html>
