@@ -10,7 +10,7 @@ urlpatterns = [
     path('competicoes/nova/', views.criar_competicao, name='criar_competicao'),
     path('competicoes/editar/<int:pk>/', views.editar_competicao, name='editar_competicao'),
 
-    path('treinos/deletar/<int:pk>/', views.deletar_treinos, name='deletar_treino'),
+    path('deletar/<int:pk>/', views.deletar_treinos, name='deletar_treino'),
     path('competicoes/deletar/<int:pk>/', views.deletar_competicao, name='deletar_competicao'),
     
 ]

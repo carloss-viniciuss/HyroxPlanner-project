@@ -2,30 +2,188 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Meus Treinos - Hyrox</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyrox Planner - Treinos</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Font: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* Define a fonte global */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            color: #ffffff;
+            
+            /* Fundo Animado Fluido (Gradient Mesh Wave) */
+            background: linear-gradient(-45deg, #0b1d28, #134e4a, #1e1b4b, #0f172a, #164e63);
+            background-size: 400% 400%;
+            animation: backgroundGradient 12s ease infinite;
+        }
+
+        /* Animação que faz o fundo se mover suavemente */
+        @keyframes backgroundGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Navbar Escura Transparente */
+        .navbar-custom {
+            background-color: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Card de Vidro Principal (Glassmorphism) */
+        .main-container-card {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(16px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2.5rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Cards Internos dos Treinos com Efeito Glowing */
+        .card-treino {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(45, 212, 191, 0.1);
+        }
+
+        /* Efeito de Elevação e Brilho ao Passar o Mouse (Hover) */
+        .card-treino:hover {
+            transform: translateY(-6px);
+            border-color: rgba(45, 212, 191, 0.8);
+            box-shadow: 0 0 25px rgba(45, 212, 191, 0.35);
+        }
+
+        /* Estilização dos Botões Customizados */
+        .btn-novo-treino {
+            background-color: #3b82f6;
+            color: #ffffff;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            padding: 8px 20px;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+            transition: all 0.2s;
+        }
+        .btn-novo-treino:hover {
+            background-color: #2563eb;
+            color: #ffffff;
+            transform: scale(1.03);
+        }
+
+        .btn-editar-custom {
+            background-color: #f59e0b;
+            color: #000;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .btn-editar-custom:hover {
+            background-color: #d97706;
+            color: #000;
+        }
+
+        .btn-excluir-custom {
+            background-color: #ef4444;
+            color: #ffffff;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .btn-excluir-custom:hover {
+            background-color: #dc2626;
+            color: #ffffff;
+        }
+
+        .badge-custom {
+            background-color: rgba(148, 163, 184, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #cbd5e1;
+            font-weight: 500;
+            border-radius: 20px;
+            padding: 5px 14px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Meus Treinos Hyrox</h1>
 
-    <a href="/treinos/novo/">+ Adicionar Novo Treino</a>
-    <hr>
+    <!-- Navegação -->
+    <nav class="navbar navbar-dark navbar-custom mb-5 py-3">
+        <div class="container">
+            <span class="navbar-brand mb-0 h1 fw-bold fs-4">Hyrox Planner</span>
+            <div>
+                <a href="/treinos/" class="btn btn-outline-light btn-sm me-2 rounded-pill px-3">Treinos</a>
+                <a href="/treinos/competicoes/" class="btn btn-outline-light btn-sm rounded-pill px-3">Competições</a>
+            </div>
+        </div>
+    </nav>
 
-    {% if treinos %}
-        <ul>
-        {% for treino in treinos %}
-            <li>
-                <strong>{{ treino.nome }}</strong> ({{ treino.tipo }}) - {{ treino.data }}<br>
-                Duração: {{ treino.duracao }} | Intensidade: {{ treino.intensidade }}
-                <a href="/treinos/editar/{{ treino.pk }}/">Editar</a>
-                <a href="/treinos/deletar/{{ treino.pk }}/" onclick="return confirm('Tem certeza que deseja excluir este treino?');">Excluir</a>
-            </li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>Nenhum treino cadastrado ainda.</p>
-    {% endif %}
+    <div class="container mb-5">
+        <!-- Card Principal Transparente -->
+        <div class="main-container-card">
+            
+            <!-- Cabeçalho com Título e Botão -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="fw-bold fs-2 m-0 text-white">Meus Treinos</h2>
+                <a href="/treinos/novo/" class="btn btn-novo-treino">+ Novo Treino</a>
+            </div>
 
-    <br>
-    <a href="/treinos/competicoes/">Ver Competições</a>
+            <!-- Grid de Treinos em Cards -->
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for treino in treinos %}
+                    <div class="col">
+                        <div class="card card-treino h-100 p-2">
+                            <div class="card-body">
+                                
+                                <!-- Nome do Treino e Tag de Tipo -->
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h4 class="card-title fw-bold text-white mb-0">{{ treino.nome }}</h4>
+                                    <span class="badge badge-custom">{{ treino.tipo }}</span>
+                                </div>
+                                
+                                <!-- Detalhes do Treino -->
+                                <div class="text-light-50 fs-6 d-flex flex-column gap-1 mb-3" style="color: #cbd5e1;">
+                                    <p class="m-0">📅 Data: <strong>{{ treino.data }}</strong></p>
+                                    <p class="m-0">⏱️ Duração: <strong>{{ treino.duracao }} min</strong></p>
+                                    <p class="m-0">🔥 Intensidade: <strong>{{ treino.intensidade }}</strong></p>
+                                </div>
+
+                                <!-- Botões Editar e Excluir -->
+                                <div class="d-flex gap-2 pt-2">
+                                    <a href="/treinos/editar/{{ treino.pk }}/" class="btn btn-editar-custom w-50 py-2">Editar</a>
+                                    <a href="/treinos/deletar/{{ treino.pk }}/" 
+                                       class="btn btn-excluir-custom w-50 py-2" 
+                                       onclick="return confirm('Tem certeza que deseja excluir este treino?');">
+                                       Excluir
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="col-12 text-center py-5">
+                        <p class="fs-5 text-muted">Nenhum treino cadastrado ainda.</p>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+
 </body>
 </html>
