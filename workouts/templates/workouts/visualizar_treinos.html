@@ -17,6 +17,7 @@
                 <strong>{{ treino.nome }}</strong> ({{ treino.tipo }}) - {{ treino.data }}<br>
                 Duração: {{ treino.duracao }} | Intensidade: {{ treino.intensidade }}
                 <a href="/treinos/editar/{{ treino.pk }}/">Editar</a>
+                <a href="/treinos/deletar/{{ treino.pk }}/" onclick="return confirm('Tem certeza que deseja excluir este treino?');">Excluir</a>
             </li>
         {% endfor %}
         </ul>

@@ -59,3 +59,8 @@ def editar_competicao(request, pk):
         form = CompetForm(instance=competicao)
 
     return render(request, 'workouts/adicionar_competicoes.html', {'form': form})
+
+def deletar_treinos(request, pk):
+    treino = get_object_or_404(Treino, pk=pk)
+    treino.delete()
+    return redirect('visualizar_treinos')
