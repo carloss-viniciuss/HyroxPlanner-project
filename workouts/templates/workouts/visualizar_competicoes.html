@@ -17,6 +17,7 @@
                 <strong>{{ comp.nome }}</strong> - {{ comp.data }}<br>
                 Local: {{ comp.local }} | Categoria: {{ comp.categoria }}
                  <a href="/treinos/competicoes/editar/{{ comp.pk }}/">Editar</a>
+                 <a href="/treinos/competicoes/deletar/{{ comp.pk }}/" onclick="return confirm('Tem certeza que deseja excluir este treino?');">Excluir</a>
             </li>
         {% endfor %}
         </ul>

@@ -64,3 +64,8 @@ def deletar_treinos(request, pk):
     treino = get_object_or_404(Treino, pk=pk)
     treino.delete()
     return redirect('visualizar_treinos')
+
+def deletar_competicao(request, pk):
+    competicao = get_object_or_404(Competicao, pk=pk)
+    competicao.delete()
+    return redirect('visualizar_competicoes')
