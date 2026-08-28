@@ -8,4 +8,5 @@ urlpatterns = [
 
     path('competicoes/', views.listar_competicoes, name='visualizar_competicoes'),
     path('competicoes/nova/', views.criar_competicao, name='criar_competicao'),
+    path('competicoes/editar/<int:pk>/', views.editar_competicao, name='editar_competicao')
 ]

@@ -41,8 +41,21 @@ def editar_treino(request, pk):
         form = TreinoForm(request.POST, instance=treino)
         if form.is_valid():
             form.save()
-            return redirect('listar_treinos')
+            return redirect('visualizar_treinos')
     else:
         form = TreinoForm(instance=treino)
     
     return render(request, 'workouts/adicionar_treino.html', {'form': form})
+
+def editar_competicao(request, pk):
+    competicao = get_object_or_404(Competicao, pk=pk)
+
+    if request.method == 'POST':
+        form = CompetForm(request.POST, instance=competicao)
+        if form.is_valid():
+            form.save()
+            return redirect('visualizar_competicoes')
+    else:
+        form = CompetForm(instance=competicao)
+
+    return render(request, 'workouts/adicionar_competicoes.html', {'form': form})
